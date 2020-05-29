@@ -1,22 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:news_app_flutter/models/news_item.dart';
 import 'package:news_app_flutter/models/news_source.dart';
 
 class NewsList extends StatelessWidget {
   final String sourceName;
-  NewsList({this.sourceName});
+  final String sourceID;
+  NewsList({this.sourceName, this.sourceID});
+
+  List<NewsItemModel> newsItems = [];
+
+  void getAllNewsItems() async {
+    newsItems = await Source.getAllNewsItem(sourceID);
+  }
 
   @override
   Widget build(BuildContext context) {
+    getAllNewsItems();
+
+    print('Number of articles: ${newsItems.length}');
     return ListView.builder(
-      itemCount: Source.sourceList.length,
+      itemCount: newsItems.length,
       itemBuilder: (context, index) {
-        return NewsItem();
+        return NewsItem(newsItems[index]);
       },
     );
   }
 }
 
 class NewsItem extends StatelessWidget {
+  NewsItem(this.model);
+  final NewsItemModel model;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -32,19 +46,22 @@ class NewsItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               //Image
-              Image.network(
-                  'https://ichef.bbci.co.uk/news/1024/branded_news/36AA/production/_112549931_p08fjpzs.jpg'),
+              Image.network(model.urlToImage),
 
+              //title
               Text(
-                'CNN journalist arrested live on air',
+                model.title,
                 style: TextStyle(
                     fontSize: 25.0,
                     color: Colors.black,
                     fontWeight: FontWeight.bold),
               ),
 
-              Text(
-                  'Omar Jimenez was reporting on protests in Minneapolis when he was detained by officers.')
+              //description
+              Text(model.desc),
+
+              //date
+              Text(model.date)
             ],
           ),
         ),

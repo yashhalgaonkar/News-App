@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:news_app_flutter/models/news_item.dart';
+import 'package:news_app_flutter/utils/network_helper.dart';
 import 'package:news_app_flutter/screens/news_list.dart';
+
+final String BASE_URL1 =
+    'http://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=a1611e9c9df34d9ca08d4536977f8489';
+final String BASE_URL = 'http://newsapi.org/v2/top-headlines?sources=';
 
 class Source {
   Source({this.id, this.name});
@@ -47,5 +53,35 @@ class Source {
       ));
 
     return newsList;
+  }
+
+  static String getDate(String utc) {
+    var date = DateTime.parse(utc);
+    return '${date.day}/${date.month}/${date.year}\n${date.hour} ${date.month}';
+  }
+
+  static Future<List<NewsItemModel>> getAllNewsItem(String sourceID) async {
+    print('Get all news itesm called with source $sourceID');
+    NetwrokHelper helper = NetwrokHelper(
+        url: BASE_URL + sourceID + '&apiKey=a1611e9c9df34d9ca08d4536977f8489');
+    var data = await helper.makeRequest();
+    int totalResults = data['totalResults'];
+    print('total results: $totalResults');
+    List<NewsItemModel> newsitems = [];
+
+    for (int i = 0; i < totalResults; i++) {
+      var artical = data['articles'][0];
+      NewsItemModel item = NewsItemModel(
+          author: artical['author'],
+          title: artical['title'],
+          desc: artical['description'],
+          url: artical['url'],
+          urlToImage: artical['urlToImage'],
+          publishedAt: artical['publishedAt'],
+          date: getDate(artical['publishedAt']));
+
+      newsitems.add(item);
+    }
+    return newsitems;
   }
 }

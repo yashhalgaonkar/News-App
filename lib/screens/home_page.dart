@@ -65,8 +65,7 @@ class _HomePageState extends State<HomePage>
                   isScrollable: true,
                   tabs: Source.getTabsList(),
                   onTap: (index) {
-                    //print(sources[index]);
-                    //make a request to the
+                    setState(() {});
                   },
                 ),
               ),
