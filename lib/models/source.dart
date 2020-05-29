@@ -28,6 +28,7 @@ class Source {
 
     for (int i = 0; i < totalResults; i++) {
       var artData = data['articles'][i];
+
       Article article = Article(
           author: artData['author'],
           title: artData['title'],
@@ -39,6 +40,7 @@ class Source {
 
       articles.add(article);
     }
+   
     return articles;
   }
 }

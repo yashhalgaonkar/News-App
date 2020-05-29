@@ -42,9 +42,11 @@ class SourceList {
   static List<NewsList> getNewsList() {
     List<NewsList> newsList = [];
     for (Source s in SourceList.sourceList)
-      newsList.add(NewsList(
-        sourceName: s.name,
-      ));
+      newsList.add(
+        NewsList(
+          newsArticles: [],
+        ),
+      );
 
     return newsList;
   }

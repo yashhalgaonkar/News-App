@@ -1,29 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:news_app_flutter/models/source.dart';
 import 'package:news_app_flutter/models/article.dart';
 
 class NewsList extends StatelessWidget {
-  final String sourceName;
-  final String sourceID;
-  NewsList({this.sourceName, this.sourceID});
-
-  //all the articles from this source
-  List<Article> newsArticles = [];
-
-  void getAllNewsItems() async {
-    Source source = Source(name: sourceName, id: sourceID);
-    newsArticles = await source.getArticles();
-  }
+  final List<Article> newsArticles;
+  NewsList({this.newsArticles});
 
   @override
   Widget build(BuildContext context) {
-    getAllNewsItems();
-
     print('Number of articles: ${newsArticles.length}');
     return ListView.builder(
       itemCount: newsArticles.length,
       itemBuilder: (context, index) {
-        return NewsItem(newsArticles[index]);
+        return newsArticles.length == 0
+            ? Center(child: Text('Ooops'))
+            : NewsItem(newsArticles[index]);
       },
     );
   }
