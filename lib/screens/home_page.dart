@@ -43,11 +43,13 @@ class _HomePageState extends State<HomePage>
               //The top NEWS text
               Container(
                 alignment: Alignment.center,
-                child: Text('News',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30.0,
-                        fontFamily: 'Roboto-Black')),
+                child: Text(
+                  'News',
+                  style: TextStyle(
+                      fontSize: 30.0,
+                      fontFamily: 'Arvo',
+                      fontWeight: FontWeight.bold),
+                ),
               ),
 
               //the greeting and Choose category
@@ -76,9 +78,9 @@ class _HomePageState extends State<HomePage>
                   isScrollable: true,
                   tabs: SourceList.getTabsList(),
                   onTap: (index) {
-                    setState(() {
-                      print('INdexxxxxxxxxxxxxxxxxxx');
-                    });
+                    // setState(() {
+
+                    // });
                   },
                 ),
               ),
@@ -88,7 +90,7 @@ class _HomePageState extends State<HomePage>
                 child: Container(
                   child: TabBarView(
                     controller: _tabController,
-                    children: [],
+                    children: SourceList.getNewsList(),
                   ),
                 ),
               )

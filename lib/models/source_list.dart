@@ -5,7 +5,6 @@ import 'package:news_app_flutter/models/source.dart';
 class SourceList {
   //list of sources
   static List<Source> sourceList = [
-    Source(id: 'bloomberg', name: 'Bloomberg'),
     Source(id: 'buzzfeed', name: 'Buzzfeed'),
     Source(id: 'cnn', name: 'CNN'),
     Source(id: 'espn', name: 'ESPN'),
@@ -43,9 +42,7 @@ class SourceList {
     List<NewsList> newsList = [];
     for (Source s in SourceList.sourceList)
       newsList.add(
-        NewsList(
-          newsArticles: [],
-        ),
+        NewsList(source: s),
       );
 
     return newsList;

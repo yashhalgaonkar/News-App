@@ -38,9 +38,13 @@ class Source {
           urlToImage: artData['urlToImage'],
           date: getDate(artData['publishedAt']));
 
+      if (article.url == null)
+        print('is null');
+      else
+        print('not null');
       articles.add(article);
     }
-   
+
     return articles;
   }
 }
