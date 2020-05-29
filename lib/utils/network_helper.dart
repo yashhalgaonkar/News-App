@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-class NetwrokHelper {
+class NetworkHelper {
   String url;
 
-  NetwrokHelper({this.url});
+  NetworkHelper({this.url});
 
   Future<dynamic> makeRequest() async {
     print('make request called.');

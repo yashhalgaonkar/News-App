@@ -1,5 +1,5 @@
-class NewsItemModel {
-  NewsItemModel(
+class Article {
+  Article(
       {this.author,
       this.title,
       this.desc,

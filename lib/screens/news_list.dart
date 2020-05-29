@@ -1,27 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:news_app_flutter/models/news_item.dart';
-import 'package:news_app_flutter/models/news_source.dart';
+import 'package:news_app_flutter/models/source.dart';
+import 'package:news_app_flutter/models/article.dart';
 
 class NewsList extends StatelessWidget {
   final String sourceName;
   final String sourceID;
   NewsList({this.sourceName, this.sourceID});
 
-  List<NewsItemModel> newsItems = [];
+  //all the articles from this source
+  List<Article> newsArticles = [];
 
   void getAllNewsItems() async {
-    newsItems = await Source.getAllNewsItem(sourceID);
+    Source source = Source(name: sourceName, id: sourceID);
+    newsArticles = await source.getArticles();
   }
 
   @override
   Widget build(BuildContext context) {
     getAllNewsItems();
 
-    print('Number of articles: ${newsItems.length}');
+    print('Number of articles: ${newsArticles.length}');
     return ListView.builder(
-      itemCount: newsItems.length,
+      itemCount: newsArticles.length,
       itemBuilder: (context, index) {
-        return NewsItem(newsItems[index]);
+        return NewsItem(newsArticles[index]);
       },
     );
   }
@@ -29,7 +31,7 @@ class NewsList extends StatelessWidget {
 
 class NewsItem extends StatelessWidget {
   NewsItem(this.model);
-  final NewsItemModel model;
+  final Article model;
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,4 @@
-import 'package:news_app_flutter/models/news_source.dart';
+import 'package:news_app_flutter/models/source_list.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,8 +15,10 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     super.initState();
+    //
+    //initialize the tab controller
     _tabController = TabController(
-        vsync: this, length: Source.sourceList.length, initialIndex: 0);
+        vsync: this, length: SourceList.sourceList.length, initialIndex: 0);
   }
 
   @override
@@ -63,7 +65,7 @@ class _HomePageState extends State<HomePage>
                 child: TabBar(
                   controller: _tabController,
                   isScrollable: true,
-                  tabs: Source.getTabsList(),
+                  tabs: SourceList.getTabsList(),
                   onTap: (index) {
                     setState(() {});
                   },
@@ -75,7 +77,7 @@ class _HomePageState extends State<HomePage>
                 child: Container(
                   child: TabBarView(
                     controller: _tabController,
-                    children: Source.getNewsList(),
+                    children: SourceList.getNewsList(),
                   ),
                 ),
               )
