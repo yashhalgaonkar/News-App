@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage>
                     children: [
                       Text(
                         'Hey Yash!',
-                        style: TextStyle(color: Colors.grey, fontSize: 20.0),
+                        style: TextStyle(color: Colors.black54, fontSize: 20.0),
                       ),
                       Text('Discover latest\nNews',
                           style: TextStyle(
