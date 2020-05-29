@@ -1,4 +1,4 @@
-import 'news_list.dart';
+import 'package:news_app_flutter/models/news_source.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,46 +11,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
-  List<String> sources = [
-    'NDTV',
-    'Aaj Tak',
-    'ABP News',
-    'News Nation',
-    'CNBC',
-    'TV9',
-    'Daily Hunt',
-    'YouTube',
-    'Google News',
-    'News API'
-  ];
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(vsync: this, length: 10);
-  }
-
-  List<Tab> getTabsList() {
-    List<Tab> tabs = [];
-    for (String s in sources) {
-      tabs.add(Tab(
-        child: Text(
-          s,
-          style: TextStyle(color: Colors.black),
-        ),
-      ));
-    }
-    return tabs;
-  }
-
-  List<NewsList> getNewsList() {
-    List<NewsList> newsList = [];
-    for (String s in sources)
-      newsList.add(NewsList(
-        sourceName: s,
-      ));
-
-    return newsList;
+    _tabController = TabController(
+        vsync: this, length: Source.sourceList.length, initialIndex: 0);
   }
 
   @override
@@ -97,18 +63,20 @@ class _HomePageState extends State<HomePage>
                 child: TabBar(
                   controller: _tabController,
                   isScrollable: true,
-                  tabs: getTabsList(),
+                  tabs: Source.getTabsList(),
                   onTap: (index) {
-                    print(sources[index]);
+                    //print(sources[index]);
+                    //make a request to the
                   },
                 ),
               ),
 
+              //the list of news from the source
               Expanded(
                 child: Container(
                   child: TabBarView(
                     controller: _tabController,
-                    children: getNewsList(),
+                    children: Source.getNewsList(),
                   ),
                 ),
               )
