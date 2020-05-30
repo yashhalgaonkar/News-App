@@ -13,7 +13,20 @@ class Source {
 
   String getDate(String utc) {
     var date = DateTime.parse(utc);
-    return '${date.day}/${date.month}/${date.year}\n${date.hour} ${date.month}';
+    DateTime local = date.toLocal();
+    return 'Time: ${local.hour}:${local.minute}\nDate: ${local.day}/${local.month}/${local.year}';
+  }
+
+  bool isNotNull(Article article) {
+    if (article.title == null ||
+        article.desc == null ||
+        article.date == null ||
+        article.publishedAt == null ||
+        article.url == null ||
+        article.urlToImage == null)
+      return false;
+    else
+      return true;
   }
 
   //return all the articles from that particular news source
@@ -38,11 +51,8 @@ class Source {
           urlToImage: artData['urlToImage'],
           date: getDate(artData['publishedAt']));
 
-      if (article.url == null)
-        print('is null');
-      else
-        print('not null');
-      articles.add(article);
+      //to check if any of the above property is not null
+      if (isNotNull(article)) articles.add(article);
     }
 
     return articles;

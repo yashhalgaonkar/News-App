@@ -20,10 +20,6 @@ class _HomePageState extends State<HomePage>
     //initialize the tab controller
     _tabController = TabController(
         vsync: this, length: SourceList.sourceList.length, initialIndex: 0);
-
-    _tabController.addListener(() {
-      print('Listerner called');
-    });
   }
 
   Future<List<NewsList>> getList() async {
@@ -43,12 +39,20 @@ class _HomePageState extends State<HomePage>
               //The top NEWS text
               Container(
                 alignment: Alignment.center,
-                child: Text(
-                  'News',
-                  style: TextStyle(
-                      fontSize: 30.0,
-                      fontFamily: 'Arvo',
-                      fontWeight: FontWeight.bold),
+                child: Hero(
+                  tag: 'news_tag',
+                  child: CircleAvatar(
+                    radius: 80.0,
+                    backgroundColor: Colors.black,
+                    child: Text(
+                      'News',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 40.0,
+                          fontFamily: 'Arvo',
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
                 ),
               ),
 
@@ -63,25 +67,24 @@ class _HomePageState extends State<HomePage>
                         'Hey Yash!',
                         style: TextStyle(color: Colors.black54, fontSize: 20.0),
                       ),
-                      Text('Discover latest\nNews',
+                      Text('Discover latest\nNews Here',
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 40.0))
+                              fontWeight: FontWeight.bold, fontSize: 35.0))
                     ],
                   ),
                 ),
               ),
 
               //the tabbar
-              Container(
-                child: TabBar(
-                  controller: _tabController,
-                  isScrollable: true,
-                  tabs: SourceList.getTabsList(),
-                  onTap: (index) {
-                    // setState(() {
-
-                    // });
-                  },
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Container(
+                  child: TabBar(
+                    controller: _tabController,
+                    isScrollable: true,
+                    tabs: SourceList.getTabsList(),
+                    onTap: (index) {},
+                  ),
                 ),
               ),
 

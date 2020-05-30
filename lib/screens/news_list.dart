@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_app_flutter/models/source.dart';
 import 'package:news_app_flutter/models/article.dart';
+import 'details_page.dart';
 
 class NewsList extends StatefulWidget {
   //the source object passed
@@ -44,36 +45,63 @@ class NewsItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0),
-      child: Container(
-        decoration: BoxDecoration(
-            border: Border.all(color: Colors.blue.shade400, width: 2.0),
-            borderRadius: BorderRadius.circular(12.0)),
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              //Image
-              Image.network(model.urlToImage),
-
-              //title
-              Text(
-                model.title,
-                style: TextStyle(
-                    fontSize: 25.0,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold),
+    return GestureDetector(
+      onTap: () {
+        print(model.url);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DetailsPage(url: model.url)));
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 7.0,
+                spreadRadius: 5.0,
+                color: Colors.grey.withOpacity(0.5),
+                offset: Offset(0, 3),
               ),
-
-              //description
-              Text(model.desc),
-
-              //date
-              Text(model.date)
             ],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                //chech if the image url is not null
+                Image.network(model.urlToImage),
+
+                //title of the article
+                Text(
+                  model.title,
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      color: Colors.black,
+                      fontWeight: FontWeight.normal),
+                ),
+
+                //description
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    model.desc,
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+
+                //date
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child:
+                      Text(model.date, style: TextStyle(color: Colors.black54)),
+                )
+              ],
+            ),
           ),
         ),
       ),
