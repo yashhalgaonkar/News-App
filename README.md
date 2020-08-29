@@ -4,8 +4,15 @@ A Flutter app that displays news from differet sources.
 It uses [NewsApi.org](https://newsapi.org/)
 
 ## Screenshots
-![news_splash](https://user-images.githubusercontent.com/48143957/91638673-d455a800-ea2e-11ea-8510-6fb97bbc965c.jpeg)
-![news_3](https://user-images.githubusercontent.com/48143957/91638676-d7509880-ea2e-11ea-8548-8cb3a7ecebd4.jpeg)
-![news_2](https://user-images.githubusercontent.com/48143957/91638677-d881c580-ea2e-11ea-94f3-e982cd1609d8.jpeg)
+- Splash Screen
+![news_splash](https://user-images.githubusercontent.com/48143957/91643020-5ce34100-ea4d-11ea-8edc-c4c4f1123aa3.jpeg)
 
+- Home Page
+![news_2](https://user-images.githubusercontent.com/48143957/91643021-5d7bd780-ea4d-11ea-9aa5-aff880e1e387.jpeg)
+
+- Article Page
+![news_3](https://user-images.githubusercontent.com/48143957/91643017-5a80e700-ea4d-11ea-9635-8ddd1154d188.jpeg)
+
+
+Star the repo.
 Feel free to fork!
